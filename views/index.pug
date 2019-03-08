@@ -1,0 +1,120 @@
+doctype html
+html
+  head
+    title Gerenciador de Canais (exemplo)
+    link(rel='stylesheet', href='https://unpkg.com/spectre.css/dist/spectre.min.css')
+    link(rel='stylesheet', href='https://unpkg.com/spectre.css/dist/spectre-exp.min.css')
+    link(rel='stylesheet', href='https://unpkg.com/spectre.css/dist/spectre-icons.min.css')
+    link(rel='stylesheet', href='style.css')
+    script(src='components.js')
+    script(src='app.js')
+  body
+    header.navbar.top-navbar
+      section.navbar-section
+        a(href='https://hmax.com.br', class='navbar-brand mr-2', target='_blank') HMAX
+        a(href='https://documenter.getpostman.com/view/1414832/RzZ6JLrz', class='btn btn-link', target='_blank') Docs
+        a(href='https://github.com/hmaxsoftware', class='btn btn-link', target='_blank') Github
+
+    .content
+      h1 Gerenciador de canais
+    
+      ul.tab.tab-block
+        li#tab-reservas.tab-item.active
+          a Reservas
+        li#tab-inventario.tab-item
+          a Inventario
+        li#tab-cfg.tab-item
+          a Configurações
+
+      .tab-reservas
+        h3.text-error Em desenvolvimento
+        h4 Em breve listagem e envio de reservas nesta aba
+
+      .tab-inventario.d-none
+        .card
+          .card-header
+            .card-title.h5 Tipos apartamentos
+            .card-subtitle.text-gray Lista de tipos/categorias cadastradas no PMS
+          .card-body
+            table#table-tipos-apto.table.table-striped.table-hover
+              thead
+                tr
+                  th ID
+                  th Nome
+                  th Mnemônico
+                  th Leitos
+              tbody
+                each apto in aptos
+                  tr
+                    td= apto.id
+                    td= apto.nome
+                    td= apto.mnemônico
+                    td= apto.leitos
+          .card-footer
+            button.btn.btn-primary(onclick="atualizarTiposApto()") Atualizar
+        .card
+          .card-header
+            .card-title.h5 Inventário
+            .card-subtitle.text-gray Disponibilidade dos tipos
+          .card-body
+            table#table-inventario.table.table-striped.table-hover.table-scroll
+              thead
+                tr
+              tbody
+          .card-footer
+            .form
+              .form-group
+                label.form-inline
+                  span Início
+                  input#inicio.form-input(type='date', value=inicio)
+                label.form-inline
+                  span Fim
+                  input#fim.form-input(type='date', value=fim)
+                button.btn.btn-primary(onclick="atualizarInventario()") Atualizar
+
+      .tab-cfg.d-none
+        form#form-credenciais.form-horizontal(onsubmit="setCredenciais(); return false;")
+          fieldset
+            legend Credenciais de comunicação
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='token') Token de autenticação
+              .col-9.col-sm-12
+                input#token.form-input(type='text', value=token)
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='user') Usuário do hotel
+              .col-9.col-sm-12
+                input#user.form-input(type='text', value=user)
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='password') Senha do hotel
+              .col-9.col-sm-12
+                input#password.form-input(type='password')
+            .form-group
+              .col-3.col-sm-12
+              .col-9.col-sm-12
+                button(type='submit').btn.btn-primary Alterar
+
+        form#form-urls.form-horizontal(onsubmit="setCfgIntegrador(); return false;")
+          fieldset
+            legend URLs de comunicação (callbacks)
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='url_inventario') Atualização do inventário/disponibilidade
+              .col-9.col-sm-12
+                input#url_inventario.form-input(type='text', placeholder="https://sitedointegrador.com.br/api/v1/inventario", value=url_inventario)
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='url_portais') Consulta de portais/OTAs
+              .col-9.col-sm-12
+                input#url_portais.form-input(type='text', placeholder="https://sitedointegrador.com.br/api/v1/portais", value=url_portais)
+            .form-group
+              .col-3.col-sm-12
+                label.form-label(for='url_confirmacao') Confirmação de recebimento de reserva
+              .col-9.col-sm-12
+                input#url_confirmacao.form-input(type='text', placeholder="https://sitedointegrador.com.br/api/v1/confirmacao", value=url_confirmacao)
+            .form-group
+              .col-3.col-sm-12
+              .col-9.col-sm-12
+                button.btn.btn-primary(type='submit') Alterar

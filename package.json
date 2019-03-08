@@ -1,0 +1,17 @@
+{
+  "name": "integrador-exemplo",
+  "version": "1.0.0",
+  "description": "Exemplo de uso do sdk de reservas da HMAX",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "André Braghini",
+  "license": "MIT",
+  "dependencies": {
+    "@hmaxsoftware/sdk-reservas": "^1.0.3",
+    "express": "^4.16.4",
+    "node-localdb": "0.0.3",
+    "pug": "^2.0.3"
+  }
+}
