@@ -17,4 +17,4 @@ node index.js
 
 ## Doc
 
-[Link para a documentação dos SDK no Postman]([https://www.google.com](https://documenter.getpostman.com/view/1414832/RzZ6JLrz))
+[Link para a documentação dos SDK no Postman](https://documenter.getpostman.com/view/1414832/RzZ6JLrz)
